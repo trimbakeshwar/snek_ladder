@@ -2,7 +2,8 @@
 echo "welcome to snakeladder" 
 startPosition=0 
 winningPosition=100 
-currentPosition=$startPosition 
+currentPosition=$startPosition
+numberOfTimeDieThrowForWin=0 
 function rollDie()
 { die=$((RANDOM%6 +1)) 
 checkOption
@@ -25,6 +26,7 @@ case $option in
 			;;
 	$ladder)
 			((currentPosition+=$die))
+			((numberOfTimeDieThrowForWin++))
 			if [ $currentPosition -gt $winningPosition ]
          then
             ((currentPosition-=$die))
@@ -33,10 +35,14 @@ case $option in
 esac
 }
 
-
+count=0
 while [ $currentPosition -lt $winningPosition ]
 do
    rollDie
-done
+	echo "current position $currentPosition"
 
+	((count++))
+done
+echo "number of time die thrown $count"
+echo " number of time die throw for only increase position :$numberOfTimeDieThrowForWin"
 echo "$currentPosition"

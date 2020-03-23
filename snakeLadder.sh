@@ -21,8 +21,18 @@ case $option in
 			;;
 	$ladder)
 			((currentPosition+=$die))
+			if [ $currentPosition -ge $winningPosition ]
+         then
+            ((currentPosition-=$die))
+         fi
       	;;
 esac
 }
+
+
+while [ $currentPosition -le $winningPosition ]
+do
+   rollDie
+done
 
 echo "$currentPosition"

@@ -18,6 +18,10 @@ case $option in
 			;;
 	$snake)	
 			((currentPosition-=$die))
+			if [ $currentPosition -lt $startPosition ]
+         then
+            currentPosition=$startPosition
+         fi
 			;;
 	$ladder)
 			((currentPosition+=$die))
@@ -30,7 +34,7 @@ esac
 }
 
 
-while [ $currentPosition -le $winningPosition ]
+while [ $currentPosition -lt $winningPosition ]
 do
    rollDie
 done

@@ -25,7 +25,7 @@ case $option in
 			;;
 	$ladder)
 			((currentPosition+=$die))
-			if [ $currentPosition -ge $winningPosition ]
+			if [ $currentPosition -gt $winningPosition ]
          then
             ((currentPosition-=$die))
          fi

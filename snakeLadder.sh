@@ -1,3 +1,4 @@
+#!/bin/bash -x
 echo "welcome to snakeladder" 
 startPosition=0 
 winningPosition=100 
@@ -13,25 +14,15 @@ ladder=2
 option=$((RANDOM%3))
 case $option in
 	$noplay)
-		currentPosition=$currentPosition
-		;;
+#			currentPosition=$currentPosition
+			;;
 	$snake)	
-		((currentPosition-=$die))
-		if [ $currentPosition -lt $startPosition ]
-		then
-			currentPosition=$startPosition
-		fi
-		;;
+			((currentPosition-=$die))
+			;;
 	$ladder)
-		 ((currentPosition+=$die))
-      if [ $currentPosition -gt $winningPosition ]
-      then
-         ((currentPosition-=$die))
-      fi
-      ;;
-
+			((currentPosition+=$die))
+      	;;
 esac
 }
 
-rollDie
 echo "$currentPosition"

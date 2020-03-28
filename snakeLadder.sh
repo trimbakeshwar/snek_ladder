@@ -1,63 +1,66 @@
 
 #!/bin/bash -x
 echo "welcome to snakeladder" 
-startPosition=0 
-winningPosition=100 
-currentPosition=$startPosition
-playerOne=$startPosition
-playerTwo=$startPosition
-
+STARTPOSITION=0 
+WINNINGPOSITION=100 
+currentPosition=$STARTPOSITION
+playerOne=$STARTPOSITION
+playerTwo=$STARTPOSITION
+#roll the die for change position
 function rollDie(){
 	die=$((RANDOM%6 +1)) 
 	checkOption
 }
+#chack option for snake ladder or no position
 function checkOption(){
-	noPlay=0
-	snake=1
-	ladder=2
+	NOPLAY=0
+	SNAKE=1
+	LADDER=2
 	option=$((RANDOM%3))
 	case $option in
-		$noplay)
+		$NOPLAY)
 			currentPosition=$currentPosition
 			;;
-		$snake)	
+		$SNAKE)	
 			((currentPosition-=$die))
-			if [ $currentPosition -lt $startPosition ]
-         then
-            currentPosition=$startPosition
-         fi
+			if [ $currentPosition -lt $STARTPOSITION ]
+			then
+				currentPosition=$STARTPOSITION
+			fi
 			;;
-		$ladder)
+		$LADDER)
 			((currentPosition+=$die))
 			((numberOfTimeDieThrowForWin++))
-			if [ $currentPosition -gt $winningPosition ]
-         then
-            ((currentPosition-=$die))
-         fi
-      	;;
+			if [ $currentPosition -gt $WINNINGPOSITION ]
+			then
+				((currentPosition-=$die))
+			fi
+			;;
 	esac
 }
-
+#update position
 function updatePosition(){
-	while [ $currentPosition -lt $winningPosition ]
+	while [ $currentPosition -lt $WINNINGPOSITION ]
 	do
    	rollDie
 	done
 }
+#player one play the game
 function playerOne(){
 	numberOfTimeDieThrowForWin=0
 	updatePosition
 	playerOneCount=$numberOfTimeDieThrowForWin
 	echo $playerOneCount
 }
+#player two play the game
 function playerTwo(){
-	startPosition=0 
-	winningPosition=100 
-	currentPosition=$startPosition
+	STARTPOSITION=0 
+	WINNINGPOSITION=100 
+	currentPosition=$STARTPOSITION
 	numberOfTimeDieThrowForWin=0
 	updatePosition
 	playerTwoCount=$numberOfTimeDieThrowForWin
-echo $playerTwoCount
+	echo $playerTwoCount
 }
 
 result1="$( playerOne $(()) )"
